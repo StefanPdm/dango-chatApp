@@ -1,11 +1,9 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from .models import Chat, Message
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 
 
 # Create your views here.
@@ -98,6 +96,4 @@ def register_view(request):
 
 
 def logout_view(request):
-    if request.method == "POST":
-        logout(request)
-        return render(request, "auth/login.html")
+    print(request.user)
