@@ -1,0 +1,46 @@
+ .mdl-layout__drawer-button i {
+   line-height: 48px !important;
+ }
+
+ .mdl-layout__header-row {
+   width: 100%;
+   justify-content: space-between;
+ }
+
+ .mdl-layout-title {
+   /* width: 100%; */
+   align-items: center;
+   justify-content: space-between;
+ }
+
+ .mdl-layout__header-row span {
+   display: flex;
+   align-items: center;
+ }
+
+ .page-content {
+   padding: 100px 100px;
+ }
+
+ .login-container {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   width: 100vw;
+   height: 100vh;
+   padding: 200px;
+ }
+
+ .form-subline {
+   font-size: 0.7rem;
+
+ }
+
+ .form-subline a {
+   text-decoration: none;
+   font-weight: 800;
+ }
+
+ .pink {
+   color: rgb(255, 64, 129);
+ }
