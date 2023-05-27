@@ -1,68 +1,73 @@
 {% extends "base.html" %} {% block content%}
-
-<div class="login-container">
-   <h3>Login</h3>
-   <form
-      action="/login/"
-      method="POST"
-   >
-      {% csrf_token %}
-      <div class="row">
-         <input
-            type="hidden"
-            name="redirect"
-            value="{{redirect}}"
-         />
-         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+<div class="form-wrapper">
+   <div class="form-container">
+      <h3>Login</h3>
+      <form
+         action="/login/"
+         method="POST"
+      >
+         {% csrf_token %}
+         <div class="row">
             <input
-               class="mdl-textfield__input"
-               type="text"
-               id="username"
-               name="username"
+               type="hidden"
+               name="redirect"
+               value="{{redirect}}"
             />
-            <label
-               class="mdl-textfield__label"
-               for="username"
-               >Username</label
+            <div
+               class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
             >
+               <input
+                  class="mdl-textfield__input"
+                  type="text"
+                  id="username"
+                  name="username"
+               />
+               <label
+                  class="mdl-textfield__label"
+                  for="username"
+                  >Username</label
+               >
+            </div>
          </div>
-      </div>
-      <div class="row">
-         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input
-               class="mdl-textfield__input"
-               type="password"
-               id="password"
-               name="password"
-            />
-            <label
-               class="mdl-textfield__label"
-               for="password"
-               >Password</label
+         <div class="row">
+            <div
+               class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
             >
+               <input
+                  class="mdl-textfield__input"
+                  type="password"
+                  id="password"
+                  name="password"
+               />
+               <label
+                  class="mdl-textfield__label"
+                  for="password"
+                  >Password</label
+               >
+            </div>
          </div>
-      </div>
-      <div class="row">
-         <button
-            type="submit"
-            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-         >
-            Login
-         </button>
-         {% if login_error %}
-         <div>
-            <strong>
-               <br />
-               Username or password is not valid!</strong
+         <div class="row">
+            <button
+               type="submit"
+               class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
             >
+               Login
+            </button>
+            {% if login_error %}
+            <div>
+               <strong>
+                  <br />
+                  Username or password is not valid!</strong
+               >
+            </div>
+            {% endif %}
          </div>
-         {% endif %}
+      </form>
+      <div class="form-subline">
+         <br />
+         No account? Then click <strong><a href="/register/">SIGNUP</a></strong> to
+         register.
       </div>
-   </form>
-   <div class="form-subline">
-      <br />
-      No account? Then click <strong><a href="/register/">SIGNUP</a></strong> to
-      register.
    </div>
 </div>
 {% endblock %}
