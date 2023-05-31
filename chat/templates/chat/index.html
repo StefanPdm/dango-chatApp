@@ -1,9 +1,67 @@
 {% extends "base.html" %} {% block content%} {% if request.user.is_authenticated %}
-{% for message in messages %}
-<div>[{{ message.created_at }}] {{message.author}}: <em>{{message.text}}</em></div>
-{% endfor %}
+<div id="messageContainer">
+   {% for message in messages %}
+   <div>
+      <span class="text-gray"> [{{ message.created_at }}] </span>
+      {{message.author}}: <em>{{message.text}}</em>
+   </div>
+   {% endfor %}
+</div>
+<script>
+   async function sendMessage() {
+      let formData = new FormData();
+      formData.append("textMessage", messageField.value);
+      try {
+         messageContainer.innerHTML +=
+            /*hmtl*/
+            `<div id="tempMessage">
+         <span class="text-gray">[DATUM]</span>
+         Name: {{request.user.first_name}}
+         <em class="text-gray">${messageField.value}</em>
+         </div>`;
+
+         let response = await fetch("/chat/", {
+            method: "POST",
+            body: formData,
+            headers: {"X-CSRFToken": "{{ csrf_token }}"},
+         });
+         let jsonResponse = await response.json();
+         jsonResponse = JSON.parse(jsonResponse);
+         let date = new Date(jsonResponse.fields.created_at);
+         const monthNames = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+         ];
+         let messageDate = `${
+            monthNames[date.getMonth()]
+         }  ${date.getDate()}, ${date.getFullYear()}`;
+         console.log(jsonResponse);
+         console.log("Successfully sent message");
+         tempMessage.remove();
+         messageContainer.innerHTML +=
+            /*hmtl*/
+            `<div>
+         <span class="text-gray">[${messageDate}]</span>
+         {{request.user.username}}:
+         <em>${jsonResponse.fields.text}</em>
+         </div>`;
+      } catch (err) {
+         console.log("Error", err);
+      }
+   }
+</script>
 <form
-   action="/chat/"
+   onsubmit="sendMessage(); return false;"
    method="post"
 >
    {% csrf_token %}
@@ -11,12 +69,12 @@
       <input
          class="mdl-textfield__input"
          type="text"
-         id="sample3"
+         id="messageField"
          name="textMessage"
       />
       <label
          class="mdl-textfield__label"
-         for="sample3"
+         for="messageField"
          >Your Message..</label
       >
    </div>

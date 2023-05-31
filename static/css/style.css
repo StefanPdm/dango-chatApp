@@ -1,3 +1,7 @@
+ .text-gray {
+   color: lightgray
+ }
+
  .mdl-layout__drawer-button i {
    line-height: 48px !important;
  }
